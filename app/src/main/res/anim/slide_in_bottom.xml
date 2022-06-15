@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shareInterpolator="false">
+    <translate
+        android:duration="300"
+        android:fromXDelta="0%"
+        android:fromYDelta="0%"
+        android:toXDelta="100%"
+        android:toYDelta="0%" />
+    <!--
+        duration : 애니메이션이 지속될 시간
+        단위는 ms
+        fromXDelta : 오른쪽 방향으로 얼마나 이동할지
+        100%면 오른쪽 화면 끝까지 이동
+        fromYDelta : 위쪽 방향으로 얼마나 이동할지
+        toXDelta : 왼쪽 방향으로 얼마나 이동할지
+        toYDelta : 아래쪽 방향으로 얼마나 이동할지
+    -->
+</set>
