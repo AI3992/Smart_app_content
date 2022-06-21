@@ -23,6 +23,7 @@ public class Popup extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        setContentView(R.layout.dialog);
         tvcount = findViewById(R.id.count_view);
         tvcount.setText(count+"");
         upbtn = findViewById(R.id.up_button);
@@ -42,9 +43,6 @@ public class Popup extends AppCompatActivity {
                 tvcount.setText(count+"");
             }
         });
-
-        setContentView(R.layout.dialog);
-
     }
 
 }
