@@ -18,17 +18,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="145dp"
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView2"
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="메뉴판"
-                android:textSize="50dp" />
+                android:layout_height="match_parent"
+                android:src="@drawable/android_title"></ImageView>
         </LinearLayout>
 
         <GridLayout
@@ -51,11 +48,11 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/iceamericano"></ImageView>
+                    android:src="@drawable/aa"></ImageView>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/card_ice_A"
+                android:id="@+id/card_banila"
                 android:layout_width="180dp"
                 app:cardElevation="4dp"
                 android:layout_height="200dp"
@@ -65,10 +62,10 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/iceamericano"></ImageView>
+                    android:src="@drawable/banila"></ImageView>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
-                android:id="@+id/card_ice_A"
+                android:id="@+id/card_caramel"
                 android:layout_width="180dp"
                 app:cardElevation="4dp"
                 android:layout_height="200dp"
@@ -78,10 +75,10 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/iceamericano"></ImageView>
+                    android:src="@drawable/caramel"></ImageView>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
-                android:id="@+id/card_ice_A"
+                android:id="@+id/card_kapu"
                 android:layout_width="180dp"
                 app:cardElevation="4dp"
                 android:layout_height="200dp"
@@ -91,7 +88,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/iceamericano"></ImageView>
+                    android:src="@drawable/kapu"></ImageView>
             </androidx.cardview.widget.CardView>
         </GridLayout>
     </LinearLayout>

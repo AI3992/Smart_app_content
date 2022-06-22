@@ -13,9 +13,10 @@
         android:layout_gravity="center"
         tools:ignore="MissingConstraints">
 
-        <Space
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="74dp" />
+            android:layout_height="145dp"
+            android:src="@drawable/android_title"/>
 
         <LinearLayout
             android:layout_width="match_parent"

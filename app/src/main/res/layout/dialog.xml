@@ -67,7 +67,7 @@
                 android:layout_height="51dp" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/Order_button"
                 android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:textSize="25dp"
