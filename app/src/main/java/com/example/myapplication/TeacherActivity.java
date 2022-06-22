@@ -21,10 +21,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -113,13 +117,13 @@ public class TeacherActivity extends MainActivity {
             @Override
             public void onClick(View view) {
 
-                Map<String, Object> user = new HashMap<>();
-                user.put("order_name", Select_order);
-                user.put("order_int", count);
-                user.put("born", 1815);
+                Map<String, Object> Order = new HashMap<>();
+                Order.put("order_name", Select_order);
+                Order.put("order_int", count);
+                Order.put("User_name", "송한새");
 
-                db.collection("users")
-                        .add(user)
+                db.collection("Order")
+                        .add(Order)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
@@ -130,6 +134,20 @@ public class TeacherActivity extends MainActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Log.w("MEKA", "Error adding document", e);
+                            }
+                        });
+                db.collection("Order")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        Log.d("reading", document.getId() + " => " + document.getData());
+                                    }
+                                } else {
+                                    Log.w("reading", "Error getting documents.", task.getException());
+                                }
                             }
                         });
             }

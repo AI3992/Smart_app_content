@@ -29,11 +29,11 @@
             android:layout_width="match_parent"
             android:layout_height="38dp"
             android:orientation="horizontal">
+
             <EditText
                 android:id="@+id/input_User_id"
                 android:layout_width="209dp"
                 android:layout_height="match_parent"
-                android:hint="아이디"
                 android:textSize="20dp"></EditText>
 
             <Space
