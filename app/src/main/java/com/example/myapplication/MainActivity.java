@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+            String user_name = Email_Edit.getText().toString();
+
             //라디오 버튼 값 지정
             RadioButton teacherjob = (RadioButton) findViewById(R.id.Teacherjob);
             RadioButton baristajob = (RadioButton) findViewById(R.id.Baristajob);
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 Intent nextIntent = new Intent(this, TeacherActivity.class);
                 //Intent nextIntent = new Intent(this, TeacherActivity.class);
+                nextIntent.putExtra("user", user_name);
                 startActivity(nextIntent);
                 finish();
                 overridePendingTransition(R.anim.slide_out_bottom, R.anim.slide_in_bottom);

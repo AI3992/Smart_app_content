@@ -1,19 +1,11 @@
 package com.example.myapplication;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.GridView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,26 +13,28 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.zip.Inflater;
 
 public class TeacherActivity extends MainActivity {
 
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
     public String Select_order;
+    Write_Order_List write_order_list;
+
+    Intent i = getIntent();
+    String user_name = (String)i.getStringExtra("user");
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    DatabaseReference databaseReference;
+
+    FirebaseDatabase firebaseDatabase;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +44,8 @@ public class TeacherActivity extends MainActivity {
 
         GridLayout mainGrid = (GridLayout) findViewById(R.id.mainGrid);
         setSingleEvent(mainGrid);
+
+
     }
     private void setSingleEvent(GridLayout mainGrid){
         for(int i = 0; i <mainGrid.getChildCount();i++){
@@ -117,7 +113,7 @@ public class TeacherActivity extends MainActivity {
             @Override
             public void onClick(View view) {
 
-                Map<String, Object> Order = new HashMap<>();
+                /*Map<String, Object> Order = new HashMap<>();
                 Order.put("order_name", Select_order);
                 Order.put("order_int", count);
                 Order.put("User_name", "송한새");
@@ -149,7 +145,15 @@ public class TeacherActivity extends MainActivity {
                                     Log.w("reading", "Error getting documents.", task.getException());
                                 }
                             }
-                        });
+                        });*/
+                write_order_list = new Write_Order_List();
+                String order_int = count.toString();
+                String order_name = Select_order.toString();
+                String User_name = user_name.toString();
+
+                addDataFirebase(order_name, order_int, User_name);
+
+                dialog.dismiss();
             }
         });
     }
@@ -160,5 +164,23 @@ public class TeacherActivity extends MainActivity {
         overridePendingTransition(R.anim.slide_out_bottom, R.anim.slide_in_bottom);
     }
 
+    private void addDataFirebase(String Order_name, String Order_int, String User_name){
+        write_order_list.setOrder_name(Order_name);
+        write_order_list.setOrder_int(Order_int);
+        write_order_list.setUser_name(User_name);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                databaseReference.setValue(write_order_list);
+
+                Toast.makeText(TeacherActivity.this, "Data added", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TeacherActivity.this, "Fail to add data"+error, Toast.LENGTH_SHORT ).show();
+            }
+        });
+    }
 
 }
