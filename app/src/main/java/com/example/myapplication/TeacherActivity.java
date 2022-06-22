@@ -27,9 +27,6 @@ public class TeacherActivity extends MainActivity {
     public String Select_order;
     Write_Order_List write_order_list;
 
-    Intent i = getIntent();
-    String user_name = (String)i.getStringExtra("user");
-
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     DatabaseReference databaseReference;
@@ -44,6 +41,9 @@ public class TeacherActivity extends MainActivity {
 
         GridLayout mainGrid = (GridLayout) findViewById(R.id.mainGrid);
         setSingleEvent(mainGrid);
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("WriteOrderList");
 
 
     }
@@ -63,18 +63,22 @@ public class TeacherActivity extends MainActivity {
                     }
                     else if (finalI == 1){
                         Select_order = "바닐라 라떼";
-                        Intent intent = new Intent(TeacherActivity.this,Popup.class);
-                        startActivity(intent);
+                        createNewDialog();
+
+                        //Intent intent = new Intent(TeacherActivity.this,Popup.class);
+                        //startActivity(intent);
                     }
                     else if (finalI == 2){
                         Select_order = "카라멜 마끼아또";
-                        Intent intent = new Intent(TeacherActivity.this,Popup.class);
-                        startActivity(intent);
+                        createNewDialog();
+                        //Intent intent = new Intent(TeacherActivity.this,Popup.class);
+                        //startActivity(intent);
                     }
                     else if (finalI == 3){
                         Select_order = "카푸치노";
-                        Intent intent = new Intent(TeacherActivity.this,Popup.class);
-                    startActivity(intent);
+                        createNewDialog();
+                        //Intent intent = new Intent(TeacherActivity.this,Popup.class);
+                        //startActivity(intent);
                     }
                 }
             });
@@ -88,7 +92,7 @@ public class TeacherActivity extends MainActivity {
         Button orderbtn = (Button) contectpopupView.findViewById(R.id.Order_button);
         Button upbtn = (Button) contectpopupView.findViewById(R.id.up_button);
         Button downbtn = (Button) contectpopupView.findViewById(R.id.down_button);
-        final int[] count = {0};
+        final int[] count = {1};
         TextView textcount = (TextView) contectpopupView.findViewById(R.id.count_view);
 
         dialogBuilder.setView(contectpopupView);
@@ -146,10 +150,14 @@ public class TeacherActivity extends MainActivity {
                                 }
                             }
                         });*/
+
+                Intent intent = getIntent();
+                String user_name = intent.getStringExtra("usre");
+
                 write_order_list = new Write_Order_List();
                 String order_int = count.toString();
-                String order_name = Select_order.toString();
-                String User_name = user_name.toString();
+                String order_name = Select_order;
+                String User_name = user_name;
 
                 addDataFirebase(order_name, order_int, User_name);
 
